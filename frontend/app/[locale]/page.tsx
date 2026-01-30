@@ -55,9 +55,49 @@ export default function Home() {
     fetchCompanies();
   }, []);
 
-  // Filter companies
+  // Calculate data completeness score for sorting
+  const getCompletenessScore = (company: HamburgTarget): number => {
+    let score = 0;
+
+    // Core business data (most important)
+    if (company.company_name) score += 2;
+    if (company.employee_count && company.employee_count > 0) score += 3;
+    if (company.equity_eur && company.equity_eur !== 0) score += 3;
+    if (company.net_income_eur !== null && company.net_income_eur !== 0) score += 3;
+    if (company.total_assets_eur && company.total_assets_eur > 0) score += 2;
+
+    // Financial details
+    if (company.retained_earnings_eur !== null && company.retained_earnings_eur !== 0) score += 1;
+    if (company.liabilities_eur && company.liabilities_eur > 0) score += 1;
+    if (company.receivables_eur !== null && company.receivables_eur !== 0) score += 1;
+    if (company.cash_assets_eur !== null && company.cash_assets_eur !== 0) score += 1;
+
+    // Location data
+    if (company.address_street) score += 2;
+    if (company.address_zip) score += 1;
+    if (company.address_city) score += 2;
+    if (company.address_country) score += 1;
+
+    // Industry classification
+    if (company.wz_code) score += 2;
+    if (company.wz_code_description) score += 1;
+
+    // Shareholder data
+    if (company.shareholder_details && company.shareholder_details.length > 0) score += 3;
+    else if (company.shareholder_names) score += 2;
+    if (company.shareholder_dobs) score += 2;
+    if (company.last_ownership_change_year) score += 2;
+
+    // Data recency
+    if (company.year && company.year >= 2020) score += 2;
+    else if (company.year && company.year >= 2015) score += 1;
+
+    return score;
+  };
+
+  // Filter and sort companies
   const filteredCompanies = useMemo(() => {
-    return companies.filter((company) => {
+    const filtered = companies.filter((company) => {
       // Search query
       if (filters.searchQuery) {
         const query = filters.searchQuery.toLowerCase();
@@ -96,6 +136,27 @@ export default function Home() {
       }
 
       return true;
+    });
+
+    // Sort by completeness score (highest first), then by Nachfolge-Score, then by name
+    return filtered.sort((a, b) => {
+      const scoreA = getCompletenessScore(a);
+      const scoreB = getCompletenessScore(b);
+
+      // Primary sort: completeness score
+      if (scoreB !== scoreA) {
+        return scoreB - scoreA;
+      }
+
+      // Secondary sort: Nachfolge-Score (higher is better)
+      const nachfolgeA = getCompanyNachfolgeScore(a);
+      const nachfolgeB = getCompanyNachfolgeScore(b);
+      if (nachfolgeB !== nachfolgeA) {
+        return nachfolgeB - nachfolgeA;
+      }
+
+      // Tertiary sort: company name
+      return (a.company_name || '').localeCompare(b.company_name || '');
     });
   }, [companies, filters]);
 
