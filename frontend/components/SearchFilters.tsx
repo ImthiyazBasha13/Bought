@@ -19,7 +19,7 @@ export default function SearchFilters({
 }: SearchFiltersProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const handleChange = (key: keyof FilterState, value: string | number | boolean) => {
+  const handleChange = (key: keyof FilterState, value: string | number | boolean | null) => {
     onFiltersChange({ ...filters, [key]: value });
   };
 
