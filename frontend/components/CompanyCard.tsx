@@ -48,7 +48,7 @@ export default function CompanyCard({ company, isHovered, onHover }: CompanyCard
         {/* Content */}
         <div className="p-4">
           {/* Badges */}
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-3">
             <Badge variant={scoreVariant}>
               Nachfolge-Score: {score}/10
             </Badge>
@@ -58,6 +58,24 @@ export default function CompanyCard({ company, isHovered, onHover }: CompanyCard
               </Badge>
             )}
           </div>
+
+          {/* Industry Classification */}
+          {(company.wz_code || company.wz_code_description) && (
+            <div className="mb-4 pb-3 border-b border-gray-100">
+              <div className="flex items-start gap-2">
+                {company.wz_code && (
+                  <span className="inline-block bg-gray-100 px-2 py-0.5 rounded text-xs font-mono text-gray-700 flex-shrink-0">
+                    WZ {company.wz_code}
+                  </span>
+                )}
+                {company.wz_code_description && (
+                  <p className="text-xs text-gray-600 line-clamp-2 flex-1">
+                    {company.wz_code_description}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Metrics Grid */}
           <div className="grid grid-cols-2 gap-3">
