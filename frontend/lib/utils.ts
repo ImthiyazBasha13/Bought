@@ -47,10 +47,36 @@ export function calculateAge(dob: string | null): number | null {
   }
 }
 
+/**
+ * Calculate Nachfolge-Score (1-10) based on shareholder age
+ * Higher score = higher succession opportunity
+ *
+ * @param age - Shareholder age in years
+ * @returns Score from 1-10
+ */
+export function calculateNachfolgeScore(age: number | null): number {
+  if (age === null) return 1;
+
+  if (age >= 65) {
+    // Score 10 for age 65+
+    return 10;
+  } else if (age >= 55) {
+    // Score 7-9 for age 55-64
+    // Linear scale: 55 → 7, 64 → 9.9
+    const ageInRange = age - 55; // 0-9
+    return Math.min(9, Math.round(7 + (ageInRange / 10) * 3));
+  } else {
+    // Score 1-6 for age <55
+    // Linear scale: 0 → 1, 54 → 6
+    return Math.min(6, Math.max(1, Math.round((age / 55) * 6)));
+  }
+}
+
+/** @deprecated Use calculateNachfolgeScore instead */
 export function getSuccessionRisk(age: number | null): 'high' | 'medium' | 'low' {
-  if (age === null) return 'low';
-  if (age >= 65) return 'high';
-  if (age >= 55) return 'medium';
+  const score = calculateNachfolgeScore(age);
+  if (score >= 10) return 'high';
+  if (score >= 7) return 'medium';
   return 'low';
 }
 
@@ -63,11 +89,13 @@ export function parseShareholders(company: HamburgTarget): ParsedShareholder[] {
       if (detail.name) {
         const dob = detail.dob || null;
         const age = calculateAge(dob);
+        const score = calculateNachfolgeScore(age);
         shareholders.push({
           name: detail.name,
           dob,
           age,
-          successionRisk: getSuccessionRisk(age),
+          nachfolgeScore: score,
+          successionRisk: getScoreVariant(score),
           percentage: detail.percentage ?? detail.ownership_percentage ?? null,
         });
       }
@@ -82,11 +110,13 @@ export function parseShareholders(company: HamburgTarget): ParsedShareholder[] {
   for (let i = 0; i < names.length; i++) {
     const dob = dobs[i] || null;
     const age = calculateAge(dob);
+    const score = calculateNachfolgeScore(age);
     shareholders.push({
       name: names[i],
       dob,
       age,
-      successionRisk: getSuccessionRisk(age),
+      nachfolgeScore: score,
+      successionRisk: getScoreVariant(score),
       percentage: null,
     });
   }
@@ -94,13 +124,46 @@ export function parseShareholders(company: HamburgTarget): ParsedShareholder[] {
   return shareholders;
 }
 
-export function getHighestSuccessionRisk(company: HamburgTarget): 'high' | 'medium' | 'low' {
+/**
+ * Get company-level Nachfolge-Score (highest among all shareholders)
+ *
+ * @param company - Hamburg Target company data
+ * @returns Highest score from all shareholders (1-10)
+ */
+export function getCompanyNachfolgeScore(company: HamburgTarget): number {
   const shareholders = parseShareholders(company);
-  if (shareholders.length === 0) return 'low';
 
-  if (shareholders.some(s => s.successionRisk === 'high')) return 'high';
-  if (shareholders.some(s => s.successionRisk === 'medium')) return 'medium';
+  if (shareholders.length === 0) return 1;
+
+  // Return the highest score (oldest shareholder)
+  const scores = shareholders.map(s => s.nachfolgeScore);
+
+  return Math.max(...scores);
+}
+
+/**
+ * Get color for score visualization
+ * 10 = red, 7-9 = amber, 1-6 = green
+ */
+export function getScoreColor(score: number): string {
+  if (score >= 10) return '#EF4444'; // red
+  if (score >= 7) return '#F59E0B'; // amber
+  return '#10B981'; // green
+}
+
+/**
+ * Get score category for badge styling
+ */
+export function getScoreVariant(score: number): 'high' | 'medium' | 'low' {
+  if (score >= 10) return 'high';
+  if (score >= 7) return 'medium';
   return 'low';
+}
+
+/** @deprecated Use getCompanyNachfolgeScore instead */
+export function getHighestSuccessionRisk(company: HamburgTarget): 'high' | 'medium' | 'low' {
+  const score = getCompanyNachfolgeScore(company);
+  return getScoreVariant(score);
 }
 
 export function getFullAddress(company: HamburgTarget): string {

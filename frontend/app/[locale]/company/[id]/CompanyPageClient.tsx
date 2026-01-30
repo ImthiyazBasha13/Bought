@@ -4,7 +4,7 @@ import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { HamburgTarget } from '@/lib/types';
-import { formatCurrency, formatNumber, getFullAddress, getHighestSuccessionRisk } from '@/lib/utils';
+import { formatCurrency, formatNumber, getFullAddress, getCompanyNachfolgeScore, getScoreVariant } from '@/lib/utils';
 import MetricCard from '@/components/ui/MetricCard';
 import Badge from '@/components/ui/Badge';
 import FinancialCharts from '@/components/FinancialCharts';
@@ -13,9 +13,9 @@ import ShareholderInfo from '@/components/ShareholderInfo';
 export default function CompanyPageClient({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
 }) {
-  const { id } = use(params);
+  const { id, locale } = use(params);
   const [company, setCompany] = useState<HamburgTarget | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -66,7 +66,7 @@ export default function CompanyPageClient({
           </h2>
           <p className="text-gray-600 mb-4">{error || 'This company does not exist.'}</p>
           <Link
-            href="/"
+            href={`/${locale}`}
             className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors inline-block"
           >
             Back to Home
@@ -76,7 +76,8 @@ export default function CompanyPageClient({
     );
   }
 
-  const successionRisk = getHighestSuccessionRisk(company);
+  const nachfolgeScore = getCompanyNachfolgeScore(company);
+  const scoreVariant = getScoreVariant(nachfolgeScore);
   const yearsSinceChange = company.last_ownership_change_year
     ? new Date().getFullYear() - company.last_ownership_change_year
     : null;
@@ -89,7 +90,7 @@ export default function CompanyPageClient({
           {/* Back Link */}
           <div className="py-4">
             <Link
-              href="/"
+              href={`/${locale}`}
               className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,10 +118,8 @@ export default function CompanyPageClient({
 
               {/* Status Badges */}
               <div className="flex flex-wrap gap-2">
-                <Badge variant={successionRisk}>
-                  {successionRisk === 'high' && '🔴 High Succession Risk'}
-                  {successionRisk === 'medium' && '🟡 Medium Risk'}
-                  {successionRisk === 'low' && '🟢 Low Risk'}
+                <Badge variant={scoreVariant}>
+                  Nachfolge-Score: {nachfolgeScore}/10
                 </Badge>
                 {yearsSinceChange && yearsSinceChange > 10 && (
                   <Badge variant="neutral">
@@ -178,6 +177,21 @@ export default function CompanyPageClient({
               </h3>
               <dl className="space-y-4">
                 <DetailItem label="Data Year" value={company.year?.toString() || 'N/A'} />
+                {(company.wz_code || company.wz_code_description) && (
+                  <div className="py-2 border-b border-gray-100">
+                    <dt className="text-sm text-gray-500 mb-1">Corporate Purpose</dt>
+                    <dd className="text-sm font-medium text-gray-900">
+                      {company.wz_code && (
+                        <span className="inline-block bg-gray-100 px-2 py-1 rounded text-xs font-mono mr-2">
+                          WZ {company.wz_code}
+                        </span>
+                      )}
+                      {company.wz_code_description && (
+                        <span className="block mt-1">{company.wz_code_description}</span>
+                      )}
+                    </dd>
+                  </div>
+                )}
                 <DetailItem
                   label="Last Ownership Change"
                   value={

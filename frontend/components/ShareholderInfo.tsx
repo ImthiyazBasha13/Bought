@@ -9,7 +9,7 @@ import {
   Legend,
 } from 'recharts';
 import { HamburgTarget, ParsedShareholder } from '@/lib/types';
-import { parseShareholders } from '@/lib/utils';
+import { parseShareholders, getScoreVariant } from '@/lib/utils';
 import Badge from './ui/Badge';
 
 interface ShareholderInfoProps {
@@ -34,8 +34,8 @@ export default function ShareholderInfo({ company }: ShareholderInfoProps) {
     );
   }
 
-  const highRiskCount = shareholders.filter(s => s.successionRisk === 'high').length;
-  const mediumRiskCount = shareholders.filter(s => s.successionRisk === 'medium').length;
+  const highRiskCount = shareholders.filter(s => s.nachfolgeScore >= 10).length;
+  const mediumRiskCount = shareholders.filter(s => s.nachfolgeScore >= 7 && s.nachfolgeScore < 10).length;
 
   // Prepare pie chart data for ownership
   const ownershipData = shareholders
@@ -98,12 +98,12 @@ export default function ShareholderInfo({ company }: ShareholderInfoProps) {
         <div className="flex gap-2">
           {highRiskCount > 0 && (
             <Badge variant="high">
-              {highRiskCount} High Risk
+              {highRiskCount} Score 10
             </Badge>
           )}
           {mediumRiskCount > 0 && (
             <Badge variant="medium">
-              {mediumRiskCount} Medium Risk
+              {mediumRiskCount} Score 7-9
             </Badge>
           )}
         </div>
@@ -194,7 +194,7 @@ export default function ShareholderInfo({ company }: ShareholderInfoProps) {
                 Age
               </th>
               <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Succession Risk
+                Nachfolge-Score
               </th>
             </tr>
           </thead>
@@ -211,23 +211,23 @@ export default function ShareholderInfo({ company }: ShareholderInfoProps) {
         </table>
       </div>
 
-      {/* Risk Explanation */}
+      {/* Score Explanation */}
       <div className="mt-6 pt-4 border-t border-gray-100">
         <p className="text-xs text-gray-500 font-medium mb-2">
-          Succession Risk Indicators
+          Nachfolge-Score Indicators
         </p>
         <div className="grid grid-cols-3 gap-4 text-xs">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-red-500" />
-            <span className="text-gray-600">High: Age 65+</span>
+            <span className="text-gray-600">Score 10 (Age 65+)</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-amber-500" />
-            <span className="text-gray-600">Medium: Age 55-64</span>
+            <span className="text-gray-600">Score 7-9 (Age 55-64)</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span className="text-gray-600">Low: Age &lt;55</span>
+            <span className="text-gray-600">Score 1-6 (Age &lt;55)</span>
           </div>
         </div>
       </div>
@@ -270,9 +270,9 @@ function ShareholderRow({
       <td className="py-4 px-4 text-center">
         <span
           className={`font-semibold ${
-            shareholder.successionRisk === 'high'
+            shareholder.nachfolgeScore >= 10
               ? 'text-red-600'
-              : shareholder.successionRisk === 'medium'
+              : shareholder.nachfolgeScore >= 7
               ? 'text-amber-600'
               : 'text-gray-900'
           }`}
@@ -281,10 +281,8 @@ function ShareholderRow({
         </span>
       </td>
       <td className="py-4 px-4 text-center">
-        <Badge variant={shareholder.successionRisk}>
-          {shareholder.successionRisk === 'high' && '🔴 High'}
-          {shareholder.successionRisk === 'medium' && '🟡 Medium'}
-          {shareholder.successionRisk === 'low' && '🟢 Low'}
+        <Badge variant={getScoreVariant(shareholder.nachfolgeScore)}>
+          {shareholder.nachfolgeScore}/10
         </Badge>
       </td>
     </tr>

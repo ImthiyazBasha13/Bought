@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { HamburgTarget } from '@/lib/types';
-import { formatCurrency, getShortAddress, getHighestSuccessionRisk, formatNumber } from '@/lib/utils';
+import { formatCurrency, getShortAddress, getCompanyNachfolgeScore, getScoreVariant, formatNumber } from '@/lib/utils';
 import Badge from './ui/Badge';
 
 interface CompanyCardProps {
@@ -12,13 +13,16 @@ interface CompanyCardProps {
 }
 
 export default function CompanyCard({ company, isHovered, onHover }: CompanyCardProps) {
-  const successionRisk = getHighestSuccessionRisk(company);
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] || 'en';
+  const score = getCompanyNachfolgeScore(company);
+  const scoreVariant = getScoreVariant(score);
   const yearsSinceChange = company.last_ownership_change_year
     ? new Date().getFullYear() - company.last_ownership_change_year
     : null;
 
   return (
-    <Link href={`/company/${company.id}`}>
+    <Link href={`/${locale}/company/${company.id}`}>
       <div
         className={`group bg-white rounded-xl border transition-all duration-200 cursor-pointer ${
           isHovered
@@ -45,10 +49,8 @@ export default function CompanyCard({ company, isHovered, onHover }: CompanyCard
         <div className="p-4">
           {/* Badges */}
           <div className="flex flex-wrap gap-2 mb-4">
-            <Badge variant={successionRisk}>
-              {successionRisk === 'high' && '🔴 High Succession Risk'}
-              {successionRisk === 'medium' && '🟡 Medium Risk'}
-              {successionRisk === 'low' && '🟢 Low Risk'}
+            <Badge variant={scoreVariant}>
+              Nachfolge-Score: {score}/10
             </Badge>
             {yearsSinceChange && yearsSinceChange > 10 && (
               <Badge variant="neutral">

@@ -54,6 +54,25 @@ html {
   background-color: transparent;
 }
 
+/* Ensure popups appear above markers */
+.mapboxgl-popup {
+  z-index: 1000 !important;
+}
+
+.map-popup-high-z .mapboxgl-popup-content {
+  z-index: 1001 !important;
+}
+
+/* Markers should be below popups */
+.custom-marker-wrapper {
+  z-index: 1 !important;
+}
+
+/* Hovered markers slightly higher but still below popups */
+.custom-marker-wrapper:hover {
+  z-index: 10 !important;
+}
+
 /* Focus styles */
 *:focus-visible {
   outline: 2px solid var(--primary);

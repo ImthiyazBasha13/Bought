@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "title": "Bought",
+    "signIn": "Anmelden"
+  },
+  "common": {
+    "years": "Jahre",
+    "loading": "Laden",
+    "error": "Fehler",
+    "na": "N/V"
+  },
+  "search": {
+    "placeholder": "Unternehmen suchen...",
+    "filters": "Filter",
+    "clearAll": "Alle Filter löschen",
+    "allCities": "Alle Städte",
+    "noResults": "Keine Unternehmen gefunden",
+    "noResultsDescription": "Passen Sie Ihre Filter an, um mehr Ergebnisse zu sehen.",
+    "resultsCount": "{count} Unternehmen",
+    "resultsCountFiltered": "{filtered} von {total} Unternehmen"
+  },
+  "filters": {
+    "employees": "Mitarbeiter",
+    "equity": "Eigenkapital",
+    "income": "Nettoeinkommen",
+    "city": "Stadt",
+    "minScore": "Mindest-Nachfolge-Score",
+    "scoreDescription": "Höhere Werte bedeuten größere Nachfolgechancen (10 = Alter 65+, 7-9 = Alter 55-64, 1-6 = Alter <55)"
+  },
+  "score": {
+    "label": "Nachfolge-Score",
+    "legend": "Nachfolge-Score",
+    "high": "Score 10 (Alter 65+)",
+    "medium": "Score 7-9 (Alter 55-64)",
+    "low": "Score 1-6 (Alter <55)",
+    "indicators": "Nachfolge-Score Indikatoren",
+    "highCount": "{count} Score 10",
+    "mediumCount": "{count} Score 7-9"
+  },
+  "company": {
+    "card": {
+      "equity": "Eigenkapital",
+      "totalAssets": "Gesamtvermögen",
+      "netIncome": "Nettoeinkommen",
+      "employees": "Mitarbeiter",
+      "dataFrom": "Daten von {year}",
+      "viewDetails": "Details anzeigen"
+    },
+    "detail": {
+      "backToListings": "Zurück zur Übersicht",
+      "companyDetails": "Unternehmensdetails",
+      "location": "Standort",
+      "dataYear": "Datenjahr",
+      "lastOwnershipChange": "Letzter Eigentümerwechsel",
+      "yearsAgo": "vor {years} Jahren",
+      "receivables": "Forderungen",
+      "cashAssets": "Barvermögen",
+      "liabilities": "Verbindlichkeiten",
+      "retainedEarnings": "Gewinnrücklagen",
+      "viewOnGoogleMaps": "Auf Google Maps ansehen",
+      "interested": "Interesse an dieser Gelegenheit?",
+      "interestedDescription": "Kontaktieren Sie uns, um mehr über diese Nachfolgemöglichkeit zu erfahren.",
+      "requestInfo": "Informationen anfordern",
+      "notFound": "Unternehmen nicht gefunden",
+      "notFoundDescription": "Dieses Unternehmen existiert nicht.",
+      "backToHome": "Zurück zur Startseite",
+      "loadingDetails": "Unternehmensdetails werden geladen...",
+      "yearsSinceChange": "{years} Jahre seit Eigentümerwechsel"
+    }
+  },
+  "shareholders": {
+    "title": "Gesellschafter",
+    "noData": "Keine Gesellschafterinformationen verfügbar.",
+    "highOpportunity": "Hohe Nachfolgechance",
+    "highOpportunityDescriptionSingle": "Ein Gesellschafter ist über 65 Jahre alt, was auf Nachfolgeplanungsbedarf hinweist.",
+    "highOpportunityDescriptionMultiple": "{count} Gesellschafter sind über 65 Jahre alt, was auf starken Nachfolgeplanungsbedarf hinweist.",
+    "ownershipDistribution": "Eigentumsverteilung",
+    "shareholderDetails": "Gesellschafterdetails",
+    "name": "Name",
+    "ownership": "Anteil",
+    "dateOfBirth": "Geburtsdatum",
+    "age": "Alter",
+    "unknown": "Unbekannt"
+  },
+  "map": {
+    "geocoding": "Adressen werden geokodiert...",
+    "noAddressData": "Keine Adressdaten verfügbar",
+    "noAddressDataDescription": "Unternehmen benötigen address_street, address_zip und address_city in der Datenbank für die Geokodierung.",
+    "partialData": "Zeige {shown} von {total} Unternehmen (fehlende Adressdaten)"
+  },
+  "charts": {
+    "financialOverview": "Finanzübersicht",
+    "noHistoricalData": "Keine historischen Daten verfügbar",
+    "noHistoricalDataDescription": "Finanzielle Trends erfordern mehrjährige Daten.",
+    "equity": "Eigenkapital",
+    "totalAssets": "Gesamtvermögen",
+    "netIncome": "Nettoeinkommen",
+    "amount": "Betrag (EUR)"
+  }
+}

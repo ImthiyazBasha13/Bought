@@ -19,6 +19,8 @@ export interface HamburgTarget {
   address_zip: string | null;
   address_city: string | null;
   address_country: string | null;
+  wz_code: string | null;
+  wz_code_description: string | null;
 }
 
 export interface ShareholderDetail {
@@ -33,6 +35,8 @@ export interface ParsedShareholder {
   name: string;
   dob: string | null;
   age: number | null;
+  nachfolgeScore: number; // 1-10 scale
+  /** @deprecated Use nachfolgeScore instead */
   successionRisk: 'high' | 'medium' | 'low';
   percentage: number | null;
 }
@@ -50,6 +54,9 @@ export interface FilterState {
   maxEquity: number;
   minIncome: number;
   maxIncome: number;
+  minNachfolgeScore: number; // 1-10 scale
+  selectedCity: string | null; // 'Hamburg', 'Buxtehude', or null for all
+  /** @deprecated Use minNachfolgeScore instead */
   highSuccessionRiskOnly: boolean;
 }
 

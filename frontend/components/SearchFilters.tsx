@@ -32,6 +32,8 @@ export default function SearchFilters({
       maxEquity: 50000000,
       minIncome: -1000000,
       maxIncome: 10000000,
+      minNachfolgeScore: 1,
+      selectedCity: null,
       highSuccessionRiskOnly: false,
     });
   };
@@ -44,7 +46,8 @@ export default function SearchFilters({
     filters.maxEquity < 50000000 ||
     filters.minIncome > -1000000 ||
     filters.maxIncome < 10000000 ||
-    filters.highSuccessionRiskOnly;
+    filters.minNachfolgeScore > 1 ||
+    filters.selectedCity !== null;
 
   return (
     <div className="bg-white border-b border-gray-200 sticky top-16 z-40">
@@ -75,17 +78,39 @@ export default function SearchFilters({
             </svg>
           </div>
 
-          {/* Quick Filter Chips */}
-          <button
-            onClick={() => handleChange('highSuccessionRiskOnly', !filters.highSuccessionRiskOnly)}
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
-              filters.highSuccessionRiskOnly
-                ? 'bg-primary text-white border-primary'
-                : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
-            }`}
-          >
-            🔴 High Succession Risk
-          </button>
+          {/* City Filter Chips */}
+          <div className="flex gap-2">
+            <button
+              onClick={() => handleChange('selectedCity', null)}
+              className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
+                filters.selectedCity === null
+                  ? 'bg-primary text-white border-primary'
+                  : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
+              }`}
+            >
+              All Cities
+            </button>
+            <button
+              onClick={() => handleChange('selectedCity', 'Hamburg')}
+              className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
+                filters.selectedCity === 'Hamburg'
+                  ? 'bg-primary text-white border-primary'
+                  : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
+              }`}
+            >
+              Hamburg
+            </button>
+            <button
+              onClick={() => handleChange('selectedCity', 'Buxtehude')}
+              className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
+                filters.selectedCity === 'Buxtehude'
+                  ? 'bg-primary text-white border-primary'
+                  : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
+              }`}
+            >
+              Buxtehude
+            </button>
+          </div>
 
           {/* Filter Toggle */}
           <button
@@ -112,7 +137,8 @@ export default function SearchFilters({
                   filters.minEmployees > 0 || filters.maxEmployees < 1000,
                   filters.minEquity > 0 || filters.maxEquity < 50000000,
                   filters.minIncome > -1000000 || filters.maxIncome < 10000000,
-                  filters.highSuccessionRiskOnly,
+                  filters.minNachfolgeScore > 1,
+                  filters.selectedCity !== null,
                 ].filter(Boolean).length}
               </span>
             )}
@@ -129,6 +155,28 @@ export default function SearchFilters({
         {/* Expanded Filters */}
         {isExpanded && (
           <div className="mt-4 pt-4 border-t border-gray-100">
+            {/* Nachfolge-Score Filter */}
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Minimum Nachfolge-Score: {filters.minNachfolgeScore}/10
+              </label>
+              <div className="flex items-center gap-4">
+                <span className="text-xs text-gray-500">1</span>
+                <input
+                  type="range"
+                  min="1"
+                  max="10"
+                  value={filters.minNachfolgeScore}
+                  onChange={(e) => handleChange('minNachfolgeScore', parseInt(e.target.value))}
+                  className="flex-1 accent-primary"
+                />
+                <span className="text-xs text-gray-500">10</span>
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                Higher scores indicate greater succession opportunity (10 = age 65+, 7-9 = age 55-64, 1-6 = age &lt;55)
+              </p>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Employees Filter */}
               <div>

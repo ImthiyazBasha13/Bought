@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "title": "Bought",
+    "signIn": "Sign In"
+  },
+  "common": {
+    "years": "years",
+    "loading": "Loading",
+    "error": "Error",
+    "na": "N/A"
+  },
+  "search": {
+    "placeholder": "Search companies...",
+    "filters": "Filters",
+    "clearAll": "Clear all filters",
+    "allCities": "All Cities",
+    "noResults": "No companies found",
+    "noResultsDescription": "Try adjusting your filters to see more results.",
+    "resultsCount": "{count} companies",
+    "resultsCountFiltered": "{filtered} of {total} companies"
+  },
+  "filters": {
+    "employees": "Employees",
+    "equity": "Equity",
+    "income": "Net Income",
+    "city": "City",
+    "minScore": "Minimum Nachfolge-Score",
+    "scoreDescription": "Higher scores indicate greater succession opportunity (10 = age 65+, 7-9 = age 55-64, 1-6 = age <55)"
+  },
+  "score": {
+    "label": "Nachfolge-Score",
+    "legend": "Nachfolge-Score",
+    "high": "Score 10 (Age 65+)",
+    "medium": "Score 7-9 (Age 55-64)",
+    "low": "Score 1-6 (Age <55)",
+    "indicators": "Nachfolge-Score Indicators",
+    "highCount": "{count} Score 10",
+    "mediumCount": "{count} Score 7-9"
+  },
+  "company": {
+    "card": {
+      "equity": "Equity",
+      "totalAssets": "Total Assets",
+      "netIncome": "Net Income",
+      "employees": "Employees",
+      "dataFrom": "Data from {year}",
+      "viewDetails": "View Details"
+    },
+    "detail": {
+      "backToListings": "Back to listings",
+      "companyDetails": "Company Details",
+      "location": "Location",
+      "dataYear": "Data Year",
+      "lastOwnershipChange": "Last Ownership Change",
+      "yearsAgo": "{years} years ago",
+      "receivables": "Receivables",
+      "cashAssets": "Cash Assets",
+      "liabilities": "Liabilities",
+      "retainedEarnings": "Retained Earnings",
+      "viewOnGoogleMaps": "View on Google Maps",
+      "interested": "Interested in this opportunity?",
+      "interestedDescription": "Contact us to learn more about this succession opportunity.",
+      "requestInfo": "Request Information",
+      "notFound": "Company Not Found",
+      "notFoundDescription": "This company does not exist.",
+      "backToHome": "Back to Home",
+      "loadingDetails": "Loading company details...",
+      "yearsSinceChange": "{years} years since ownership change"
+    }
+  },
+  "shareholders": {
+    "title": "Shareholders",
+    "noData": "No shareholder information available.",
+    "highOpportunity": "High Succession Opportunity",
+    "highOpportunityDescriptionSingle": "One shareholder is 65+ years old, indicating potential succession planning needs.",
+    "highOpportunityDescriptionMultiple": "{count} shareholders are 65+ years old, indicating strong succession planning needs.",
+    "ownershipDistribution": "Ownership Distribution",
+    "shareholderDetails": "Shareholder Details",
+    "name": "Name",
+    "ownership": "Ownership",
+    "dateOfBirth": "Date of Birth",
+    "age": "Age",
+    "unknown": "Unknown"
+  },
+  "map": {
+    "geocoding": "Geocoding addresses...",
+    "noAddressData": "No Address Data Available",
+    "noAddressDataDescription": "Companies need address_street, address_zip, and address_city populated in the database for geocoding.",
+    "partialData": "Showing {shown} of {total} companies (missing address data)"
+  },
+  "charts": {
+    "financialOverview": "Financial Overview",
+    "noHistoricalData": "No historical data available",
+    "noHistoricalDataDescription": "Financial trends require multiple years of data.",
+    "equity": "Equity",
+    "totalAssets": "Total Assets",
+    "netIncome": "Net Income",
+    "amount": "Amount (EUR)"
+  }
+}

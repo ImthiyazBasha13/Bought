@@ -4,19 +4,32 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { HamburgTarget, CompanyWithCoordinates } from '@/lib/types';
-import { formatCurrency, getHighestSuccessionRisk } from '@/lib/utils';
+import { formatCurrency, getCompanyNachfolgeScore, getScoreColor } from '@/lib/utils';
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN!;
 
 interface CompanyMapProps {
   companies: HamburgTarget[];
   hoveredCompanyId: number | null;
+  selectedCity: string | null;
   onMarkerClick?: (company: HamburgTarget) => void;
   onMarkerHover?: (id: number | null) => void;
 }
 
 // Cache for geocoded coordinates
 const geocodeCache: Record<string, { lat: number; lng: number }> = {};
+
+// City bounds for zoom functionality
+const CITY_BOUNDS: Record<string, [[number, number], [number, number]]> = {
+  Hamburg: [
+    [9.7, 53.4], // Southwest [lng, lat]
+    [10.3, 53.7], // Northeast [lng, lat]
+  ],
+  Buxtehude: [
+    [9.64, 53.44],
+    [9.72, 53.50],
+  ],
+};
 
 async function geocodeAddress(
   street: string | null,
@@ -53,6 +66,7 @@ async function geocodeAddress(
 export default function CompanyMap({
   companies,
   hoveredCompanyId,
+  selectedCity,
   onMarkerClick,
   onMarkerHover,
 }: CompanyMapProps) {
@@ -101,7 +115,7 @@ export default function CompanyMap({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v11',
       center: [9.9937, 53.5511], // Hamburg center
-      zoom: 9.5,
+      zoom: 11,
     });
 
     map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
@@ -123,9 +137,8 @@ export default function CompanyMap({
     companiesWithCoords.forEach((company) => {
       if (!company.latitude || !company.longitude) return;
 
-      const risk = getHighestSuccessionRisk(company);
-      const color =
-        risk === 'high' ? '#EF4444' : risk === 'medium' ? '#F59E0B' : '#10B981';
+      const score = getCompanyNachfolgeScore(company);
+      const color = getScoreColor(score);
 
       // Create custom marker element with wrapper to prevent position shift
       const el = document.createElement('div');
@@ -171,6 +184,7 @@ export default function CompanyMap({
         offset: 25,
         closeButton: false,
         maxWidth: '280px',
+        className: 'map-popup-high-z',
       }).setHTML(`
         <div style="padding: 8px;">
           <h3 style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">
@@ -207,6 +221,26 @@ export default function CompanyMap({
       markersRef.current.set(company.id, marker);
     });
   }, [companiesWithCoords, onMarkerClick, onMarkerHover]);
+
+  // Handle city selection zoom
+  useEffect(() => {
+    if (!map.current) return;
+
+    if (selectedCity && CITY_BOUNDS[selectedCity]) {
+      // Zoom to city bounds
+      map.current.fitBounds(CITY_BOUNDS[selectedCity], {
+        padding: 50,
+        duration: 1000,
+      });
+    } else {
+      // Reset to default Hamburg view
+      map.current.flyTo({
+        center: [9.9937, 53.5511],
+        zoom: 9.5,
+        duration: 1000,
+      });
+    }
+  }, [selectedCity]);
 
   // Handle hover state
   useEffect(() => {
@@ -264,19 +298,19 @@ export default function CompanyMap({
       )}
       {/* Legend */}
       <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-md p-3">
-        <p className="text-xs font-medium text-gray-700 mb-2">Succession Risk</p>
+        <p className="text-xs font-medium text-gray-700 mb-2">Nachfolge-Score</p>
         <div className="space-y-1">
           <div className="flex items-center gap-2 text-xs">
             <span className="w-3 h-3 rounded-full bg-red-500" />
-            <span>High (65+)</span>
+            <span>10 (65+ years)</span>
           </div>
           <div className="flex items-center gap-2 text-xs">
             <span className="w-3 h-3 rounded-full bg-amber-500" />
-            <span>Medium (55-64)</span>
+            <span>7-9 (55-64 years)</span>
           </div>
           <div className="flex items-center gap-2 text-xs">
             <span className="w-3 h-3 rounded-full bg-emerald-500" />
-            <span>Low (&lt;55)</span>
+            <span>1-6 (&lt;55 years)</span>
           </div>
         </div>
       </div>
