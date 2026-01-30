@@ -14,7 +14,6 @@
     "date-fns": "^3.2.0",
     "mapbox-gl": "^3.1.0",
     "next": "^15.1.4",
-    "next-intl": "^4.8.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-map-gl": "^7.1.7",
