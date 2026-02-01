@@ -399,36 +399,653 @@ Bought is a web-based platform for discovering succession opportunities in Hambu
 
 ---
 
-## User Workflows
+## Platform Value Proposition
 
-### Workflow 1: Browse Companies
-1. User lands on homepage (`/en/` or `/de/`)
-2. Views list of companies sorted by data completeness
-3. Hovers over companies to see map location
-4. Applies filters (city, score, employees, equity, income)
-5. Clicks on company card to view details
+### What Bought Does
+Bought is a specialized B2B marketplace that connects potential buyers with succession-ready SMEs in Hamburg, Germany. The platform solves a critical business challenge: identifying companies where aging shareholders may be looking to exit, creating acquisition opportunities for investors, entrepreneurs, and strategic buyers.
 
-### Workflow 2: Identify High-Opportunity Targets
-1. User sets minimum Nachfolge-Score filter to 10
-2. System shows only companies with shareholders age 65+
-3. User reviews financial metrics on cards
-4. Clicks through to detailed pages
-5. Reviews shareholder information and ownership distribution
-6. Requests more information via CTA button
+### Core Value Delivered
 
-### Workflow 3: Geographic Exploration
-1. User selects city filter (Hamburg or Buxtehude)
-2. Map automatically zooms to city bounds
-3. User views only companies in selected city
-4. Hovers over map markers to highlight company cards
-5. Clicks markers for direct navigation to detail pages
+**For Buyers/Investors:**
+1. **Time Savings**: Eliminates months of manual research by aggregating and scoring 100+ Hamburg SMEs in one place
+2. **Data-Driven Insights**: Nachfolge-Score algorithm instantly identifies high-probability succession opportunities based on shareholder age demographics
+3. **Financial Transparency**: Complete financial profiles with equity, assets, income, and cash flow metrics for quick due diligence
+4. **Quality Filtering**: Data completeness scoring surfaces well-documented companies first, reducing wasted effort on incomplete profiles
+5. **Geographic Intelligence**: Interactive maps and city filters help identify location-specific opportunities
+6. **Sector Discovery**: WZ code classification enables industry-focused search strategies
 
-### Workflow 4: Language Preference
-1. User clicks language switcher in nav bar
-2. Entire UI translates to selected language
-3. URL updates to reflect locale (e.g., `/en/` → `/de/`)
-4. Preference maintained during navigation
-5. All labels, buttons, and content translated
+**For the SME Succession Market:**
+1. **Market Transparency**: Makes succession opportunities visible and accessible
+2. **Efficient Matching**: Connects sellers (aging shareholders) with qualified buyers
+3. **Demographic Trends**: Highlights the scale of succession challenges in Hamburg's Mittelstand
+4. **Professional Presentation**: Showcases companies with comprehensive data packages
+
+### Key Differentiators
+
+**1. Succession-Specific Intelligence**
+- Unlike general business directories, Bought focuses exclusively on succession readiness
+- Shareholder age analysis provides unique insight not available elsewhere
+- Scoring algorithm prioritizes companies with imminent succession needs (65+ shareholders)
+
+**2. Data Quality Over Quantity**
+- Completeness scoring ensures users see actionable profiles first
+- Multi-factor data validation (23 database fields)
+- Recent financial data prioritized (2020+ years weighted higher)
+
+**3. User-Centric Design**
+- No login required for browsing (low friction)
+- Instant filtering with real-time results
+- Bilingual support for local and international buyers
+- Mobile-responsive for on-the-go research
+
+**4. Geographic Focus**
+- Deep coverage of Hamburg market (Germany's second-largest city)
+- Neighborhood-level insights via interactive maps
+- City-specific filtering with automatic zoom
+
+### Business Impact
+
+**Reduced Transaction Costs:**
+- Hours saved in company discovery (vs. manual research)
+- Pre-screened leads reduce broker fees
+- Comprehensive data reduces due diligence time
+
+**Improved Match Quality:**
+- Shareholder age data indicates seller motivation
+- Financial metrics filter unprofitable targets early
+- Industry classification enables strategic fit assessment
+
+**Market Efficiency:**
+- Brings liquidity to illiquid SME market
+- Reduces information asymmetry
+- Accelerates succession planning decisions
+
+---
+
+## Detailed User Journeys
+
+### Journey 1: First-Time Visitor Discovery
+
+**Persona:** International investor exploring Hamburg acquisition opportunities
+
+**Steps:**
+
+1. **Landing (0:00)**
+   - User arrives at homepage via Google search or referral
+   - Sees loading spinner with "Loading companies..." message
+   - Within 2 seconds, sees grid of company cards with map
+
+2. **Initial Orientation (0:05)**
+   - Scans navigation bar: Logo, language switcher (EN/DE), Sign In button
+   - Notices dual-pane layout: company cards (left) + interactive map (right)
+   - Observes filter bar at top showing "X of Y companies"
+   - Sees companies ordered with complete data first
+
+3. **Visual Engagement (0:15)**
+   - Notices color-coded badges on company cards (red/amber/green)
+   - Hovers over a company card → sees corresponding map marker pulse/highlight
+   - Reads WZ code descriptions to understand business sectors
+   - Observes financial metrics in grid format
+
+4. **Language Preference (0:30)**
+   - Clicks "DE" in language switcher
+   - Entire interface translates to German instantly
+   - URL changes from `/en/` to `/de/`
+   - Navigates through site with German labels
+
+5. **Exploratory Filtering (1:00)**
+   - Opens "Filters" panel
+   - Adjusts minimum Nachfolge-Score slider to 8
+   - Results instantly filter to show high-opportunity companies
+   - Count updates: "12 of 98 companies"
+   - Map markers reduce to show only filtered results
+
+6. **Geographic Exploration (2:00)**
+   - Clicks "Hamburg" city filter button
+   - Map smoothly zooms to Hamburg city bounds
+   - Sees concentrated clusters of companies in business districts
+   - Hovers over map markers to preview company names in popups
+
+7. **Card Investigation (3:00)**
+   - Clicks on company card with "Nachfolge-Score: 10/10" badge
+   - Card has subtle hover effect: border highlight, shadow, slight scale
+   - Sees "View Details →" text underline on hover
+
+8. **Detail Page Deep Dive (3:05)**
+   - Navigates to individual company page
+   - Greeted with dark gradient hero section showing company name
+   - Sees 4 elevated metric cards (Equity, Assets, Income, Employees)
+   - Scrolls to shareholder section with pie chart
+   - Notices "High Succession Opportunity" alert banner (1 shareholder age 65+)
+   - Reviews ownership distribution and individual shareholder ages
+
+9. **Action Consideration (4:00)**
+   - Scrolls to "Interested in this opportunity?" CTA card (gradient background)
+   - Reads "Request Information" button
+   - Clicks "View on Google Maps" to verify location
+   - Uses "Back to listings" link to return to search
+
+10. **Bookmark & Exit (5:00)**
+    - Returns to main page, applies filters again
+    - Bookmarks specific company detail pages
+    - Notes URL structure includes language (`/de/company/57`)
+    - Plans to return later for deeper analysis
+
+**Key Observations:**
+- Total time to first meaningful action: <1 minute
+- Number of clicks to see detailed company info: 1 (very low friction)
+- Multiple discovery paths (cards, map, filters) accommodate different search styles
+- No account required reduces barrier to entry
+
+---
+
+### Journey 2: Strategic Buyer with Specific Criteria
+
+**Persona:** German entrepreneur seeking retail sector acquisition in Hamburg
+
+**Steps:**
+
+1. **Targeted Search (0:00)**
+   - Arrives with clear criteria: retail sector, Hamburg, 10-50 employees
+   - Immediately opens filter panel
+
+2. **Filter Application (0:15)**
+   - Sets city filter to "Hamburg"
+   - Adjusts employee range: 10 minimum, 50 maximum
+   - Sets minimum Nachfolge-Score to 7 (medium-high opportunity)
+   - Sees results narrow from 98 → 15 companies
+
+3. **Sector Identification (0:45)**
+   - Scans WZ code descriptions on company cards
+   - Looks for keywords: "Einzelhandel" (retail), "Handel" (trade)
+   - Identifies 3 promising retail businesses
+
+4. **Comparative Analysis (2:00)**
+   - Opens each retail company in new tab
+   - Compares equity levels, profitability, shareholder ages
+   - Takes notes on ownership structures
+
+5. **Decision & Next Steps (5:00)**
+   - Shortlists 2 companies with 65+ year-old shareholders
+   - Checks Google Maps locations for foot traffic assessment
+   - Plans to contact via "Request Information" button
+   - Shares URLs with business partner via email
+
+**Efficiency Gains:**
+- Found qualified targets in 5 minutes (vs. weeks of manual research)
+- Pre-filtered by succession readiness saved outreach to unmotivated sellers
+- Financial data enabled quick go/no-go decisions
+
+---
+
+### Journey 3: Geographic Investor Pattern
+
+**Persona:** Real estate fund evaluating neighborhood-based opportunities
+
+**Steps:**
+
+1. **Map-First Exploration (0:00)**
+   - Focuses on map view (right pane)
+   - Observes cluster patterns in Hamburg districts
+
+2. **Neighborhood Drilling (0:30)**
+   - Clicks city filter "Buxtehude" to explore suburb
+   - Map zooms to show 8 companies in small city
+   - Studies concentration along main streets
+
+3. **Company-Location Correlation (2:00)**
+   - Clicks map markers to view companies
+   - Assesses business addresses for real estate value
+   - Cross-references employee counts with building size needs
+
+4. **Portfolio Building (5:00)**
+   - Identifies 3 companies in same neighborhood
+   - Considers acquisition + real estate consolidation play
+   - Documents findings for investment committee
+
+**Unique Insight:**
+- Map visualization revealed geographic clusters not obvious from list view
+- Location data became primary screening criteria
+- Visual interface enabled pattern recognition at scale
+
+---
+
+### Journey 4: Mobile User Quick Check
+
+**Persona:** Advisor on-the-go checking client opportunity
+
+**Steps:**
+
+1. **Mobile Access (0:00)**
+   - Opens site on smartphone during commute
+   - Single-column layout adapts perfectly
+   - Map hidden on mobile (focus on list)
+
+2. **Search by Name (0:10)**
+   - Uses search bar to find specific company
+   - Types company name, instant filtering
+
+3. **Quick Review (0:30)**
+   - Taps company card to open detail page
+   - Reads shareholder ages and financial metrics
+   - Takes screenshot of ownership chart
+
+4. **Share (1:00)**
+   - Copies URL from browser
+   - Sends via WhatsApp to client
+   - Conversation continues in messaging app
+
+**Mobile Optimization:**
+- Touch-friendly targets (buttons, cards)
+- Readable font sizes without zooming
+- Fast page loads on cellular connection
+
+---
+
+## Platform Look & Feel
+
+### Design Philosophy
+
+**Professional Business Aesthetic**
+- Clean, corporate styling suitable for B2B audience
+- Serious tone matching financial decision-making context
+- Trustworthy presentation of numerical data
+- German Mittelstand sensibility (conservative, data-focused)
+
+**Modern Web Standards**
+- 2026 contemporary design patterns
+- Glass-morphism avoided (too trendy)
+- Subtle gradients and shadows (depth without distraction)
+- High information density without overwhelming users
+
+**Data-First Approach**
+- Metrics and numbers prominently displayed
+- Visual hierarchy guides eye to key information
+- Color used functionally (status indicators) not decoratively
+- Whitespace creates breathing room between dense content
+
+---
+
+### Visual Design Elements
+
+#### Color Palette
+
+**Primary Brand Colors:**
+- **Primary (Action)**: Deep blue/indigo - Used for interactive elements, CTAs, brand touches
+- **Dark Grays**: `#1F2937` to `#374151` - Professional, corporate feel for headers and navigation
+- **White**: `#FFFFFF` - Clean backgrounds for cards and content areas
+- **Light Grays**: `#F3F4F6` to `#E5E7EB` - Subtle backgrounds, borders, dividers
+
+**Functional Colors (Nachfolge-Score System):**
+- **Red** (`#EF4444`): Score 10 - High succession opportunity (urgent attention)
+- **Amber** (`#F59E0B`): Score 7-9 - Medium opportunity (moderate attention)
+- **Green** (`#10B981`): Score 1-6 - Lower opportunity (background context)
+
+**Data Visualization Colors:**
+- **Positive/Profit**: Emerald green (`#059669`) - Net income gains, positive trends
+- **Negative/Loss**: Red (`#DC2626`) - Losses, negative metrics
+- **Neutral**: Gray tones - N/A values, missing data
+
+#### Typography
+
+**Font Stack:**
+```
+font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif
+```
+
+**Hierarchy:**
+- **H1 (Page Titles)**: 2.25rem (36px), Bold (700), Used in hero sections
+- **H2 (Section Headers)**: 1.5rem (24px), Semibold (600), Section breaks
+- **H3 (Subsections)**: 1.125rem (18px), Semibold (600), Card headers
+- **Body Text**: 0.875rem-1rem (14-16px), Regular (400), Main content
+- **Small Text**: 0.75rem (12px), Regular/Medium, Metadata, labels
+- **Financial Numbers**: 0.875rem (14px), Semibold (600), Emphasis on metrics
+
+**Monospace (Data):**
+- WZ codes displayed in `font-mono` for technical classification codes
+- Maintains alignment and readability of numeric identifiers
+
+#### Spacing & Layout
+
+**Grid System:**
+- **2-column** company cards on desktop (50/50 split)
+- **Single column** on mobile (100% width)
+- **Consistent gap**: 1rem (16px) between cards
+- **Page padding**: 1-2rem responsive padding for content breathing room
+
+**Card Padding:**
+- **Internal**: 1rem (16px) consistent padding within cards
+- **Section separation**: 0.75-1rem vertical spacing between card sections
+- **Border radius**: 0.75rem (12px) rounded corners for modern feel
+
+**Whitespace Strategy:**
+- Generous padding around text blocks (prevents claustrophobia)
+- Clear section separators (borders, spacing)
+- Breathing room between interactive elements (prevents mis-taps)
+
+---
+
+### Component-Level Design Details
+
+#### Company Cards
+
+**Visual Structure:**
+```
+┌─────────────────────────────────┐
+│ [GRADIENT HEADER - Gray-900]   │ ← 96px height, company name overlay
+│ Company Name                     │
+│ Hamburg                          │
+├─────────────────────────────────┤
+│ [Badge: Score 10] [Badge: 12y]  │ ← Color-coded status indicators
+├─────────────────────────────────┤
+│ WZ 47.11.1 | Description text   │ ← Industry classification
+│ (truncated to 2 lines)          │
+├─────────────────────────────────┤
+│ Equity        Net Income        │ ← 2x2 metrics grid
+│ €2.5M         €450K             │
+│ Total Assets  Employees         │
+│ €5.2M         45                │
+├─────────────────────────────────┤
+│ Data from 2023    View Details→ │ ← Footer with metadata
+└─────────────────────────────────┘
+```
+
+**Interactive States:**
+- **Default**: `border-gray-200`, subtle shadow
+- **Hover**: `border-primary`, increased shadow, `scale-[1.02]` (2% growth)
+- **Map Synchronized**: When map marker hovered, card gets hover state
+- **Transition**: 200ms smooth animation for all state changes
+
+**Typography within Cards:**
+- Company name: 18px, semibold, white text on dark background
+- Address: 14px, light gray, secondary information
+- Badges: 12px, medium weight, pill-shaped with colored backgrounds
+- Metrics: 14px labels (gray-500), 14px values (semibold, gray-900)
+- WZ description: 12px, gray-600, line-clamped
+
+#### Navigation Bar
+
+**Layout:**
+```
+┌─────────────────────────────────────────────────────────┐
+│ [Logo] Bought              [EN|DE]  [Sign In]          │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Styling:**
+- **Background**: Pure white with subtle bottom border
+- **Height**: 64px (4rem) - standard touch-friendly height
+- **Position**: Fixed to top, z-index 50 (always visible during scroll)
+- **Logo**: Building icon in primary color + bold text
+- **Language Switcher**: Pill-shaped toggle, active state has dark background
+- **Sign In Button**: Rounded-full, dark background, white text, hover state lightens
+
+#### Filter Panel
+
+**Design Pattern:**
+```
+┌──────────────────────────────────────────────────────┐
+│ [Search: ____________] [Filters ▼] 45 of 98 companies│
+└──────────────────────────────────────────────────────┘
+
+[Expanded state:]
+┌──────────────────────────────────────────────────────┐
+│ Employees: [====●====] 10-50                         │
+│ Equity: [===●=====] €0 - €5M                         │
+│ Nachfolge-Score: [======●==] 7-10                    │
+│ City: [All] [Hamburg] [Buxtehude]                    │
+│ [Clear all filters]                                   │
+└──────────────────────────────────────────────────────┘
+```
+
+**Interactive Elements:**
+- **Search Box**: White background, border, focus state shows blue outline
+- **Sliders**: Custom styled with primary color thumb, gray track
+- **City Buttons**: Pill-shaped, active state has solid background
+- **Clear Link**: Text-only, primary color, underline on hover
+
+#### Map Visualization
+
+**Marker Design:**
+- **Shape**: Circular dots with size variation
+- **Colors**: Red (score 10), Amber (7-9), Green (1-6)
+- **Size**: Scales with zoom level
+- **Hover State**: Enlarges 1.5x, shows popup with company name
+- **Click State**: Navigates to company detail page
+
+**Legend (Bottom-left):**
+```
+┌────────────────────────┐
+│ Nachfolge-Score        │
+│ ● 10 (65+ years)       │
+│ ● 7-9 (55-64 years)    │
+│ ● 1-6 (<55 years)      │
+└────────────────────────┘
+```
+
+**Map Style**: Light theme with minimal labels (focus on business locations)
+
+---
+
+### Detail Page Design
+
+#### Hero Section
+
+**Visual Treatment:**
+```
+┌─────────────────────────────────────────────────────┐
+│ [Dark Gradient Background: Gray-900 to Gray-800]    │
+│                                                      │
+│ ← Back to listings                                   │
+│                                                      │
+│ COMPANY NAME (36px, bold, white)                    │
+│ 📍 Street, City (14px, gray-300)                     │
+│                                                      │
+│ [Badge: Score 10] [Badge: 15y since change]         │
+│                                                      │
+└─────────────────────────────────────────────────────┘
+```
+
+**Effect**: Creates visual hierarchy, draws attention to company name, professional dark-mode aesthetic
+
+#### Metric Cards (Elevated)
+
+**Card Styling:**
+- **Background**: White with subtle shadow-lg (elevated appearance)
+- **Position**: -48px margin-top (overlaps hero section)
+- **Grid**: 4 columns on desktop, 2 columns on mobile
+- **Content**: Large number (24px, semibold) + small label (12px, gray-500)
+- **Icons**: None (number-focused design)
+
+#### Content Sections
+
+**White Card Containers:**
+- Background: white
+- Border: subtle gray-200
+- Padding: 1.5rem (24px)
+- Border radius: 12px
+- Spacing: 2rem (32px) between sections
+
+**Information Display:**
+- Label-value pairs in `<dl>` semantic structure
+- Labels: 14px, gray-500 (subdued)
+- Values: 14px, semibold, gray-900 (prominent)
+- Dividers: 1px gray-100 lines between items
+
+---
+
+### Responsive Design Approach
+
+#### Breakpoints
+
+**Mobile (< 768px):**
+- Single column layout
+- Map hidden (complexity reduction)
+- Stacked filter controls
+- Full-width company cards
+- Larger touch targets (44px minimum)
+
+**Tablet (768px - 1024px):**
+- 2-column company grid
+- Map still hidden
+- Side-by-side filter layout
+- Optimized for portrait/landscape
+
+**Desktop (> 1024px):**
+- Split view: cards (50%) + map (50%)
+- Maximum content width: none (full bleed)
+- Hover interactions enabled
+- Multi-column layouts for dense information
+
+#### Mobile Optimizations
+
+**Touch-Friendly:**
+- Button height: minimum 44px
+- Clickable card area: entire card surface
+- Spacing between tappable elements: 8px minimum
+- No hover-dependent features
+
+**Performance:**
+- Lazy loading images
+- Reduced map complexity
+- Simplified animations
+- Optimized bundle size
+
+---
+
+### Micro-Interactions & Animations
+
+#### Hover Effects
+
+**Company Cards:**
+- Border color transition: gray → primary (200ms ease)
+- Shadow growth: shadow-sm → shadow-lg (200ms ease)
+- Scale transform: 1.0 → 1.02 (200ms ease-out)
+- Arrow underline: transparent → underline (200ms)
+
+**Buttons:**
+- Background darken on hover (200ms)
+- Scale down on click: 1.0 → 0.98 (100ms)
+- Cursor changes to pointer
+
+**Map Markers:**
+- Size increase on hover: 1.0 → 1.5 (150ms)
+- Popup fade-in: opacity 0 → 1 (200ms)
+- Synchronized highlight with cards
+
+#### Loading States
+
+**Initial Page Load:**
+- Centered spinner with animation
+- "Loading companies..." text below
+- Smooth fade-in when data loads (300ms)
+
+**Filter Application:**
+- Instant update (no loading indicator needed)
+- Results count updates immediately
+- Map re-renders smoothly
+
+#### Transitions
+
+**Page Navigation:**
+- Next.js instant client-side routing
+- Progress indicator in browser
+- Smooth content swap
+
+**Language Switch:**
+- Instant text replacement
+- URL updates
+- No flash of content
+
+---
+
+### Accessibility Considerations in Design
+
+**Color Contrast:**
+- All text meets WCAG AA standards
+- Minimum 4.5:1 ratio for body text
+- 3:1 for large text and UI components
+- Color not sole indicator (badges have text + color)
+
+**Focus States:**
+- Blue outline on keyboard focus
+- Visible tab order through interface
+- Skip links for navigation
+
+**Semantic Structure:**
+- Proper heading hierarchy (H1 → H2 → H3)
+- ARIA labels on interactive elements
+- Semantic HTML (`<nav>`, `<main>`, `<article>`)
+
+**Readability:**
+- Line height: 1.5 for body text
+- Line length: max 80 characters
+- Sufficient whitespace prevents overcrowding
+- Font sizes never below 12px
+
+---
+
+### Brand Identity Elements
+
+**Logo:**
+- Building icon in rounded square
+- Primary color background
+- White icon foreground
+- Appears in navigation and favicon
+
+**Voice & Tone:**
+- Professional, trustworthy
+- Data-driven, factual
+- No marketing hyperbole
+- German and English equally prioritized
+
+**Imagery:**
+- No stock photos (data-first approach)
+- Charts and graphs for financial data
+- Maps for geographic visualization
+- Icons minimal and functional
+
+---
+
+### Design System Consistency
+
+**Reusable Components:**
+- Badge component (3 variants: high/medium/low)
+- MetricCard component (standardized financial display)
+- DetailItem component (label-value pairs)
+- Button styles (primary, secondary, ghost)
+
+**Spacing Scale:**
+- 0.25rem (4px) increments
+- Standardized: 4px, 8px, 12px, 16px, 24px, 32px, 48px
+- Applied consistently across components
+
+**Border Radius Scale:**
+- Small (0.25rem): badges, inputs
+- Medium (0.5rem): buttons
+- Large (0.75rem): cards, modals
+- Full (9999px): pills, language switcher
+
+---
+
+### Performance-Driven Design Choices
+
+**Static Generation:**
+- Pre-rendered HTML eliminates layout shift
+- Instant paint on page load
+- No JavaScript required for initial view
+
+**Optimized Assets:**
+- SVG icons (scalable, small file size)
+- System fonts (no web font downloads)
+- Minimal CSS bundle via Tailwind purging
+- No large images (text and data focused)
+
+**Progressive Enhancement:**
+- Core content accessible without JavaScript
+- Map enhances experience but not required
+- Filters work client-side (no server dependency)
 
 ---
 
