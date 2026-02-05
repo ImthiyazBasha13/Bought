@@ -27,8 +27,8 @@ const CITY_BOUNDS: Record<string, [[number, number], [number, number]]> = {
     [10.3, 53.7], // Northeast [lng, lat]
   ],
   Buxtehude: [
-    [9.64, 53.44],
-    [9.72, 53.50],
+    [9.60, 53.42], // Southwest - zoomed out more
+    [9.76, 53.52], // Northeast - zoomed out more
   ],
 };
 
