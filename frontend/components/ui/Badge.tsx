@@ -9,9 +9,9 @@ interface BadgeProps {
 }
 
 const variantStyles = {
-  high: 'bg-red-100 text-red-800 border-red-200',
+  high: 'bg-emerald-100 text-emerald-800 border-emerald-200',
   medium: 'bg-amber-100 text-amber-800 border-amber-200',
-  low: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+  low: 'bg-red-100 text-red-800 border-red-200',
   neutral: 'bg-gray-100 text-gray-800 border-gray-200',
 };
 

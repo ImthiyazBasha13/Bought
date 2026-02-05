@@ -113,14 +113,14 @@ export default function ShareholderInfo({ company }: ShareholderInfoProps) {
 
       {/* Summary Alert */}
       {highRiskCount > 0 && (
-        <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+        <div className="mb-4 p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
           <div className="flex items-start gap-3">
             <span className="text-2xl">🎯</span>
             <div>
-              <p className="font-medium text-red-800">
+              <p className="font-medium text-emerald-800">
                 {t('shareholders.highOpportunity')}
               </p>
-              <p className="text-sm text-red-700 mt-1">
+              <p className="text-sm text-emerald-700 mt-1">
                 {highRiskCount === 1
                   ? t('shareholders.highOpportunityDescriptionSingle')
                   : t('shareholders.highOpportunityDescriptionMultiple').replace('{count}', highRiskCount.toString())}
@@ -221,7 +221,7 @@ export default function ShareholderInfo({ company }: ShareholderInfoProps) {
         </p>
         <div className="grid grid-cols-3 gap-4 text-xs">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-red-500" />
+            <span className="w-2 h-2 rounded-full bg-emerald-500" />
             <span className="text-gray-600">{t('score.high')}</span>
           </div>
           <div className="flex items-center gap-2">
@@ -229,7 +229,7 @@ export default function ShareholderInfo({ company }: ShareholderInfoProps) {
             <span className="text-gray-600">{t('score.medium')}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+            <span className="w-2 h-2 rounded-full bg-red-500" />
             <span className="text-gray-600">{t('score.low')}</span>
           </div>
         </div>
@@ -276,10 +276,10 @@ function ShareholderRow({
         <span
           className={`font-semibold ${
             shareholder.nachfolgeScore >= 10
-              ? 'text-red-600'
+              ? 'text-emerald-600'
               : shareholder.nachfolgeScore >= 7
               ? 'text-amber-600'
-              : 'text-gray-900'
+              : 'text-red-600'
           }`}
         >
           {shareholder.age !== null ? `${shareholder.age} ${t('common.years')}` : t('shareholders.unknown')}

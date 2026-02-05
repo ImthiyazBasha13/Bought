@@ -146,9 +146,9 @@ export function getCompanyNachfolgeScore(company: HamburgTarget): number {
  * 10 = red, 7-9 = amber, 1-6 = green
  */
 export function getScoreColor(score: number): string {
-  if (score >= 10) return '#EF4444'; // red
-  if (score >= 7) return '#F59E0B'; // amber
-  return '#10B981'; // green
+  if (score >= 10) return '#10B981'; // green - high succession opportunity
+  if (score >= 7) return '#F59E0B'; // amber - medium succession opportunity
+  return '#EF4444'; // red - low succession opportunity
 }
 
 /**
