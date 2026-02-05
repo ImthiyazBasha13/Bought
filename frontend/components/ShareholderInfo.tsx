@@ -176,42 +176,44 @@ export default function ShareholderInfo({ company }: ShareholderInfoProps) {
       )}
 
       {/* Shareholder Table */}
-      <div className="overflow-hidden">
+      <div>
         <h4 className="text-sm font-medium text-gray-700 mb-3">{t('shareholders.shareholderDetails')}</h4>
-        <table className="min-w-full">
-          <thead>
-            <tr className="border-b border-gray-200">
-              <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('shareholders.name')}
-              </th>
-              {hasOwnershipData && (
-                <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  {t('shareholders.ownership')}
+        <div className="overflow-x-auto -mx-6 px-6 sm:mx-0 sm:px-0">
+          <table className="min-w-full">
+            <thead>
+              <tr className="border-b border-gray-200">
+                <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  {t('shareholders.name')}
                 </th>
-              )}
-              <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('shareholders.dateOfBirth')}
-              </th>
-              <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('shareholders.age')}
-              </th>
-              <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                {t('score.label')}
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-100">
-            {shareholders.map((shareholder, index) => (
-              <ShareholderRow
-                key={index}
-                shareholder={shareholder}
-                color={COLORS[index % COLORS.length]}
-                showOwnership={hasOwnershipData}
-                t={t}
-              />
-            ))}
-          </tbody>
-        </table>
+                {hasOwnershipData && (
+                  <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                    {t('shareholders.ownership')}
+                  </th>
+                )}
+                <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  {t('shareholders.dateOfBirth')}
+                </th>
+                <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  {t('shareholders.age')}
+                </th>
+                <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  {t('score.label')}
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {shareholders.map((shareholder, index) => (
+                <ShareholderRow
+                  key={index}
+                  shareholder={shareholder}
+                  color={COLORS[index % COLORS.length]}
+                  showOwnership={hasOwnershipData}
+                  t={t}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Score Explanation */}
@@ -251,10 +253,10 @@ function ShareholderRow({
 }) {
   return (
     <tr className="hover:bg-gray-50 transition-colors">
-      <td className="py-4 px-4">
+      <td className="py-4 px-4 whitespace-nowrap">
         <div className="flex items-center gap-3">
           <div
-            className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium flex-shrink-0"
             style={{ backgroundColor: color }}
           >
             {shareholder.name.charAt(0).toUpperCase()}
@@ -263,16 +265,16 @@ function ShareholderRow({
         </div>
       </td>
       {showOwnership && (
-        <td className="py-4 px-4 text-center">
+        <td className="py-4 px-4 text-center whitespace-nowrap">
           <span className="font-semibold text-gray-900">
             {shareholder.percentage !== null ? `${shareholder.percentage}%` : t('common.na')}
           </span>
         </td>
       )}
-      <td className="py-4 px-4 text-gray-600">
+      <td className="py-4 px-4 text-gray-600 whitespace-nowrap">
         {shareholder.dob || t('shareholders.unknown')}
       </td>
-      <td className="py-4 px-4 text-center">
+      <td className="py-4 px-4 text-center whitespace-nowrap">
         <span
           className={`font-semibold ${
             shareholder.nachfolgeScore >= 10
@@ -285,7 +287,7 @@ function ShareholderRow({
           {shareholder.age !== null ? `${shareholder.age} ${t('common.years')}` : t('shareholders.unknown')}
         </span>
       </td>
-      <td className="py-4 px-4 text-center">
+      <td className="py-4 px-4 text-center whitespace-nowrap">
         <Badge variant={getScoreVariant(shareholder.nachfolgeScore)}>
           {shareholder.nachfolgeScore}/10
         </Badge>

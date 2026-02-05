@@ -7,7 +7,8 @@
     "years": "years",
     "loading": "Loading",
     "error": "Error",
-    "na": "N/A"
+    "na": "N/A",
+    "tryAgain": "Try Again"
   },
   "search": {
     "placeholder": "Search companies...",
@@ -17,7 +18,9 @@
     "noResults": "No companies found",
     "noResultsDescription": "Try adjusting your filters to see more results.",
     "resultsCount": "{count} companies",
-    "resultsCountFiltered": "{filtered} of {total} companies"
+    "resultsCountFiltered": "{filtered} of {total} companies",
+    "listView": "List View",
+    "mapView": "Map View"
   },
   "filters": {
     "employees": "Employees",

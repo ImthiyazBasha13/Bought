@@ -7,7 +7,8 @@
     "years": "Jahre",
     "loading": "Laden",
     "error": "Fehler",
-    "na": "k.A."
+    "na": "k.A.",
+    "tryAgain": "Erneut versuchen"
   },
   "search": {
     "placeholder": "Unternehmen suchen...",
@@ -17,7 +18,9 @@
     "noResults": "Keine Unternehmen gefunden",
     "noResultsDescription": "Versuchen Sie, Ihre Filter anzupassen, um mehr Ergebnisse zu sehen.",
     "resultsCount": "{count} Unternehmen",
-    "resultsCountFiltered": "{filtered} von {total} Unternehmen"
+    "resultsCountFiltered": "{filtered} von {total} Unternehmen",
+    "listView": "Listenansicht",
+    "mapView": "Kartenansicht"
   },
   "filters": {
     "employees": "Arbeitnehmer",

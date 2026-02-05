@@ -298,21 +298,21 @@ export default function CompanyMap({
           </p>
         </div>
       )}
-      {/* Legend */}
-      <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-md p-3">
-        <p className="text-xs font-medium text-gray-700 mb-2">{t('score.legend')}</p>
-        <div className="space-y-1">
-          <div className="flex items-center gap-2 text-xs">
-            <span className="w-3 h-3 rounded-full bg-emerald-500" />
-            <span>{t('score.high')}</span>
+      {/* Legend - Compact on mobile, full on desktop */}
+      <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-md p-2 sm:p-3">
+        <p className="text-xs font-medium text-gray-700 mb-1 sm:mb-2">{t('score.legend')}</p>
+        <div className="space-y-0.5 sm:space-y-1">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-xs">
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500 flex-shrink-0" />
+            <span className="text-[10px] sm:text-xs">{t('score.high')}</span>
           </div>
-          <div className="flex items-center gap-2 text-xs">
-            <span className="w-3 h-3 rounded-full bg-amber-500" />
-            <span>{t('score.medium')}</span>
+          <div className="flex items-center gap-1.5 sm:gap-2 text-xs">
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500 flex-shrink-0" />
+            <span className="text-[10px] sm:text-xs">{t('score.medium')}</span>
           </div>
-          <div className="flex items-center gap-2 text-xs">
-            <span className="w-3 h-3 rounded-full bg-red-500" />
-            <span>{t('score.low')}</span>
+          <div className="flex items-center gap-1.5 sm:gap-2 text-xs">
+            <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500 flex-shrink-0" />
+            <span className="text-[10px] sm:text-xs">{t('score.low')}</span>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { HamburgTarget, FilterState } from '@/lib/types';
 import { getCompanyNachfolgeScore } from '@/lib/utils';
+import { useTranslations } from '@/lib/i18n-context';
 import CompanyCard from '@/components/CompanyCard';
 import CompanyMap from '@/components/CompanyMap';
 import SearchFilters from '@/components/SearchFilters';
@@ -23,6 +24,7 @@ const initialFilters: FilterState = {
 };
 
 export default function Home() {
+  const t = useTranslations();
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;
@@ -31,6 +33,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterState>(initialFilters);
   const [hoveredCompanyId, setHoveredCompanyId] = useState<number | null>(null);
+  const [mobileView, setMobileView] = useState<'list' | 'map'>('list');
 
   // Fetch companies from Supabase
   useEffect(() => {
@@ -169,7 +172,7 @@ export default function Home() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
-          <p className="text-gray-600">Loading companies...</p>
+          <p className="text-gray-600">{t('common.loading')}...</p>
         </div>
       </div>
     );
@@ -181,14 +184,14 @@ export default function Home() {
         <div className="text-center max-w-md">
           <div className="text-red-500 text-5xl mb-4">⚠️</div>
           <h2 className="text-xl font-semibold text-gray-900 mb-2">
-            Connection Error
+            {t('common.error')}
           </h2>
           <p className="text-gray-600 mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors"
           >
-            Try Again
+            {t('common.tryAgain')}
           </button>
         </div>
       </div>
@@ -205,24 +208,60 @@ export default function Home() {
         filteredCount={filteredCompanies.length}
       />
 
+      {/* Mobile View Toggle - Only visible on mobile */}
+      <div className="lg:hidden sticky top-[calc(4rem+3.5rem)] z-30 bg-gray-100 border-b border-gray-200">
+        <div className="flex">
+          <button
+            onClick={() => setMobileView('list')}
+            className={`flex-1 py-3 px-4 text-sm font-medium transition-colors ${
+              mobileView === 'list'
+                ? 'bg-white text-gray-900 border-b-2 border-primary'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <div className="flex items-center justify-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              {t('search.listView')}
+            </div>
+          </button>
+          <button
+            onClick={() => setMobileView('map')}
+            className={`flex-1 py-3 px-4 text-sm font-medium transition-colors ${
+              mobileView === 'map'
+                ? 'bg-white text-gray-900 border-b-2 border-primary'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <div className="flex items-center justify-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              {t('search.mapView')}
+            </div>
+          </button>
+        </div>
+      </div>
+
       {/* Main Content - Split View */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Company List */}
-        <div className="w-full lg:w-1/2 overflow-y-auto p-4 bg-gray-50">
+        {/* Company List - Show on desktop always, on mobile only when list view selected */}
+        <div className={`w-full lg:w-1/2 overflow-y-auto p-4 bg-gray-50 ${mobileView === 'map' ? 'hidden lg:block' : ''}`}>
           {filteredCompanies.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
               <div className="text-gray-400 text-5xl mb-4">🔍</div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                No companies found
+                {t('search.noResults')}
               </h3>
               <p className="text-gray-600 mb-4">
-                Try adjusting your filters to see more results.
+                {t('search.noResultsDescription')}
               </p>
               <button
                 onClick={() => setFilters(initialFilters)}
                 className="text-primary hover:underline"
               >
-                Clear all filters
+                {t('search.clearAll')}
               </button>
             </div>
           ) : (
@@ -239,8 +278,8 @@ export default function Home() {
           )}
         </div>
 
-        {/* Map */}
-        <div className="hidden lg:block lg:w-1/2 sticky top-0">
+        {/* Map - Show on desktop always, on mobile only when map view selected */}
+        <div className={`w-full lg:w-1/2 sticky top-0 ${mobileView === 'list' ? 'hidden lg:block' : ''}`}>
           <CompanyMap
             companies={filteredCompanies}
             hoveredCompanyId={hoveredCompanyId}
